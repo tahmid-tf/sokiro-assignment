@@ -1,0 +1,111 @@
+@extends('admin.admin-panel.main')
+
+@section('content')
+    <h3>View All Product</h3>
+    <hr>
+    <div id="app">
+        <th></th>
+
+        <div class="d-flex justify-content-end">
+            <input type="text" placeholder="Search" v-model="inputData">
+        </div>
+        <br>
+
+        <table style="width: 100%; border: 1px solid #55667B">
+            <tr>
+                <th style="border: 1px solid #55667B">Product Name</th>
+                <th style="border: 1px solid #55667B">Product Stock</th>
+                <th style="border: 1px solid #55667B">Product Price</th>
+                <th style="border: 1px solid #55667B">Product Quantity</th>
+            </tr>
+
+            <tr v-for="item in dataRow">
+                <th style="border: 1px solid #55667B">@{{ item.product_name }}</th>
+                <th style="border: 1px solid #55667B">@{{ item.product_price }}</th>
+                <th style="border: 1px solid #55667B">@{{ item.product_stock }}</th>
+                <th style="border: 1px solid #55667B">@{{ item.qty }}</th>
+            </tr>
+        </table>
+
+
+        {{-- --------------------------------- Pagination ------------------------------------ --}}
+
+        <div class="container mt-4 d-flex justify-content-center">
+
+            <ul class="pagination">
+
+                <div v-if="lastPage > 1">
+                    <li :class="{ active : paginate === currentPage }" v-for="paginate in lastPage">
+                        <span @click="mainData(paginate)">@{{ paginate }}</span>
+                    </li>
+                </div>
+
+
+            </ul>
+        </div>
+
+
+        {{-- --------------------------------- Pagination ------------------------------------ --}}
+
+    </div>
+
+
+    <script>
+        const {createApp} = Vue
+
+        createApp({
+            data() {
+                return {
+                    message: 'Hello Vue!',
+                    dataRow: [],
+                    lastPage: 0,
+                    currentPage: 0,
+                    inputData : '',
+                }
+            },
+            methods: {
+                mainData(paginatedListNumber = '') {
+                    let url;
+                    if (paginatedListNumber == '') {
+                        url = window.location.origin + '/product_json-data';
+                    } else {
+                        url = window.location.origin + '/product_json-data?page=' + paginatedListNumber;
+                    }
+                    axios.get(url).then(el => {
+                        this.dataRow = el.data.data;
+                        this.lastPage = el.data.last_page;
+                        this.currentPage = el.data.current_page;
+                    })
+                },
+
+                searchData(paginatedListNumber = '' , search = '') {
+                    let url;
+                    if (paginatedListNumber == '') {
+                        url = window.location.origin + '/product_json-data_search/' + search;
+                    } else {
+                        url = window.location.origin + `/product_json-data_search/${search}?page=` + paginatedListNumber;
+                    }
+                    axios.get(url).then(el => {
+                        this.dataRow = el.data.data;
+                        this.lastPage = el.data.last_page;
+                        this.currentPage = el.data.current_page;
+                    })
+                },
+            },
+
+            watch:{
+                inputData(event){
+                    if(event == ''){
+                        this.mainData();
+                    }else {
+                        this.searchData('',event);
+                    }
+                }
+            },
+            mounted() {
+                this.mainData();
+            }
+
+        }).mount('#app')
+    </script>
+@endsection

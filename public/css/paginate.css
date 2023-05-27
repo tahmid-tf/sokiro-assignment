@@ -1,0 +1,29 @@
+.pagination li {
+    display: inline-block;
+    float: left;
+    font-size: 1.1rem;
+    color: #2196f3;
+    border: 1px solid #ddd;
+}
+.pagination li:nth-child(1n+2) {
+    border-left: none;
+}
+.pagination a {
+    text-decoration: none;
+}
+.pagination a:hover {
+    background-color: #ededed;
+}
+.pagination span {
+    cursor: pointer;
+}
+.pagination a,
+.pagination span {
+    display: block;
+    padding: 3px 12px;
+}
+.pagination .active {
+    background-color: #2196f3;
+    color: #fff;
+    border-color: #2196f3;
+}
