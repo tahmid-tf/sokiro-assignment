@@ -26,7 +26,7 @@ class ProductController extends Controller
             ->join('quantities', 'products.id', '=', 'quantities.product_id')
             ->select('products.*', 'quantities.qty')
 //            ->where('product_name',"tahmid.tf2@gmail.com")
-            ->paginate(2);
+            ->paginate(5);
 
 
         return $products;
@@ -47,7 +47,7 @@ class ProductController extends Controller
             ->join('quantities', 'products.id', '=', 'quantities.product_id')
             ->select('products.*', 'quantities.qty')
             ->where('product_name', 'LIKE', '%' . $search . '%')
-            ->paginate(2);
+            ->paginate(5);
 
 
         return $products;
