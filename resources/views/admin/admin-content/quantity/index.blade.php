@@ -1,7 +1,7 @@
 @extends('admin.admin-panel.main')
 
 @section('content')
-    <h3>View All Product</h3>
+    <h3>View Quantity</h3>
     <hr>
     <div id="app">
         <th></th>
@@ -15,17 +15,14 @@
             <tr>
                 <th style="border: 1px solid #55667B">Serial</th>
                 <th style="border: 1px solid #55667B">Product Name</th>
-                <th style="border: 1px solid #55667B">Product Stock</th>
-                <th style="border: 1px solid #55667B">Product Price</th>
                 <th style="border: 1px solid #55667B">Product Quantity</th>
+
             </tr>
 
 
             <tr v-for="(item, index) in dataRow">
                 <th style="border: 1px solid #55667B">@{{ index + 1 }}</th>
                 <th style="border: 1px solid #55667B">@{{ item.product_name }}</th>
-                <th style="border: 1px solid #55667B">@{{ item.product_price }}</th>
-                <th style="border: 1px solid #55667B">@{{ item.product_stock }}</th>
                 <th style="border: 1px solid #55667B">@{{ item.qty }}</th>
             </tr>
         </table>
@@ -76,9 +73,9 @@
                 mainData(paginatedListNumber = '') {
                     let url;
                     if (paginatedListNumber == '') {
-                        url = window.location.origin + '/product_json-data';
+                        url = window.location.origin + '/quantity_json-data';
                     } else {
-                        url = window.location.origin + '/product_json-data?page=' + paginatedListNumber;
+                        url = window.location.origin + '/quantity_json-data?page=' + paginatedListNumber;
                     }
                     axios.get(url).then(el => {
                         this.dataRow = el.data.data;
@@ -90,9 +87,9 @@
                 searchData(paginatedListNumber = '', search = '') {
                     let url;
                     if (paginatedListNumber == '') {
-                        url = window.location.origin + '/product_json-data_search/' + search;
+                        url = window.location.origin + '/quantity_json-data_search/' + search;
                     } else {
-                        url = window.location.origin + `/product_json-data_search/${search}?page=` + paginatedListNumber;
+                        url = window.location.origin + `/quantity_json-data_search/${search}?page=` + paginatedListNumber;
                     }
                     axios.get(url).then(el => {
                         this.dataRow = el.data.data;
@@ -106,8 +103,11 @@
                 inputData(event) {
                     if (event == '') {
                         this.mainData();
+                        console.log("working")
                     } else {
                         this.searchData('', event);
+                        console.log("working")
+
                     }
                 }
             },

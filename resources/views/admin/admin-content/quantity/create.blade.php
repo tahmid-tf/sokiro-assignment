@@ -1,32 +1,31 @@
 @extends('admin.admin-panel.main')
 
 @section('content')
-    <h3>Add Product</h3>
+    <h3>Add Quantity</h3>
     <hr>
     <div id="app">
         <div>
             <form @submit="addProduct($event)">
+
+
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Product Name</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Product Name" v-model="product_name">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Product Price</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Product Price"
-                           v-model="product_price">
+                    <label for="">Example select</label>
+                    <select class="form-control" id="" v-model="product_name">
+
+                        @foreach($products as $product)
+
+                            <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+
+                        @endforeach
+
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Product Stock</label>
+                    <label for="exampleInputPassword1">Add Product Quantity</label>
                     <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Product Stock"
-                           v-model="product_stock">
+                           v-model="qty">
                 </div>
-
-                {{--                <div class="form-group">--}}
-                {{--                    <label for="exampleInputPassword1">Product Quantity</label>--}}
-                {{--                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">--}}
-                {{--                </div>--}}
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
@@ -41,8 +40,7 @@
             data() {
                 return {
                     product_name: '',
-                    product_price: '',
-                    product_stock: ''
+                    qty: ''
                 }
             },
             methods: {
@@ -50,11 +48,10 @@
                     e.preventDefault();
 
                     let formData = new FormData();
-                    formData.append('product_name', this.product_name);
-                    formData.append('product_price', this.product_price);
-                    formData.append('product_stock', this.product_stock);
+                    formData.append('product_id', this.product_name);
+                    formData.append('qty', this.qty);
 
-                    axios.post('{{ route('product.store') }}', formData).then(el => {
+                    axios.post('{{ route('quantity.store') }}', formData).then(el => {
                         console.log(el);
                     });
                 }

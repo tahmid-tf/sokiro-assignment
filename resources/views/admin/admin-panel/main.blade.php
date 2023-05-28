@@ -83,6 +83,27 @@
 
         {{-- ----------------------------------------------- Products Sidebar Components ----------------------------------------------- --}}
 
+
+        {{-- ----------------------------------------------- Quantity Sidebar Components ----------------------------------------------- --}}
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#quantity"
+               aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Quantity</span>
+            </a>
+            <div id="quantity" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Product Components:</h6>
+                    <a class="collapse-item" href="{{ route('quantity.create') }}">Add Quantity</a>
+                    <a class="collapse-item" href="{{ route('quantity.index') }}">View All Quantities</a>
+                </div>
+            </div>
+        </li>
+
+        {{-- ----------------------------------------------- Quantity Sidebar Components ----------------------------------------------- --}}
+
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
