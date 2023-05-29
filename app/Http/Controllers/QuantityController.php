@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\quantity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class QuantityController extends Controller
 {
@@ -77,7 +78,7 @@ class QuantityController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -89,7 +90,10 @@ class QuantityController extends Controller
 
         $quantity = Quantity::where('product_id', $inputs['product_id'])->update($inputs);
 
-        return $quantity;
+        return response()->json([
+            'data' => $quantity,
+            'status' => Http::response('Quantity Updated', 200)
+        ]);
     }
 
     /**

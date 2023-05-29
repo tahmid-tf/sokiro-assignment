@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Quantity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Response;
 
 class ProductController extends Controller
@@ -77,7 +78,7 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -95,7 +96,10 @@ class ProductController extends Controller
             'product_id' => $product->id
         ]);
 
-        return $product;
+        return \response()->json([
+            "data" => $product,
+            "status" => Http::response("Product added", 200)
+        ]);
 
     }
 
