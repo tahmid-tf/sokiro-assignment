@@ -112,6 +112,24 @@
                 }
             },
             mounted() {
+
+                $.ajax({
+                    url: "http://127.0.0.1:8000/api/user",
+                    headers: {
+                        Authorization: "Bearer 4|FFUXk5GfuvDgrLEJgKvW5cGW25fbzwJqSmyjNY3r",
+                    },
+                    type: "GET",
+                }).then((el) => console.log(el));
+
+
+                // axios
+                //     .post("http://127.0.0.1:8000/api/login", {
+                //         email: "tahmid.tf1@gmail.com",
+                //         password: "12345678",
+                //     })
+                //     .then((el) => console.log(el));
+
+
                 this.mainData();
             }
 
