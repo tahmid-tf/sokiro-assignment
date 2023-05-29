@@ -10,7 +10,7 @@
 
                 <div class="form-group">
                     <label for="">Example select</label>
-                    <select class="form-control" id="" v-model="product_name">
+                    <select class="form-control" id="" v-model="product_name" required>
 
                         @foreach($products as $product)
 
@@ -23,8 +23,8 @@
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Add Product Quantity</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Product Stock"
-                           v-model="qty">
+                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Product Stock"
+                           v-model="qty" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -52,7 +52,7 @@
                     formData.append('qty', this.qty);
 
                     axios.post('{{ route('quantity.store') }}', formData).then(el => {
-                        console.log(el);
+                        console.log(el.status);
                     });
                 }
             }

@@ -7,7 +7,7 @@
         <th></th>
 
         <div class="d-flex justify-content-end">
-            <input type="text" placeholder="Search" v-model="inputData">
+            <input type="text" placeholder="Search Product" v-model="inputData">
         </div>
         <br>
 

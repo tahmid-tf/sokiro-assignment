@@ -9,18 +9,18 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Product Name</label>
                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                           placeholder="Product Name" v-model="product_name">
+                           placeholder="Product Name" v-model="product_name" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Product Price</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Product Price"
-                           v-model="product_price">
+                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Product Price"
+                           v-model="product_price" required step="0.01">
                 </div>
 
                 <div class="form-group">
                     <label for="exampleInputPassword1">Product Stock</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Product Stock"
-                           v-model="product_stock">
+                    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Product Stock"
+                           v-model="product_stock" required>
                 </div>
 
                 {{--                <div class="form-group">--}}
@@ -55,7 +55,9 @@
                     formData.append('product_stock', this.product_stock);
 
                     axios.post('{{ route('product.store') }}', formData).then(el => {
-                        console.log(el);
+                        if (el.status == 201) {
+                            alert("Product Added");
+                        }
                     });
                 }
             }

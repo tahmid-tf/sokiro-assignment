@@ -18,19 +18,23 @@ use App\Http\Controllers\QuantityController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// --------------------------------------------- Product --------------------------------------------------------
+
+Route::middleware('auth')->group(function () {
 
 
-Route::resource('/product', ProductController::class);
-Route::get('/product_json-data/', [ProductController::class, 'productDataJson'])->name('productDataJson');
-Route::get('/product_json-data_search/{search}', [ProductController::class, 'productDataJsonSearch'])->name('productDataJsonSearch');
+    // --------------------------------------------- Product --------------------------------------------------------
+
+
+    Route::resource('/product', ProductController::class);
+    Route::get('/product_json-data/', [ProductController::class, 'productDataJson'])->name('productDataJson');
+    Route::get('/product_json-data_search/{search}', [ProductController::class, 'productDataJsonSearch'])->name('productDataJsonSearch');
 
 
 // --------------------------------------------- Product --------------------------------------------------------
@@ -38,10 +42,10 @@ Route::get('/product_json-data_search/{search}', [ProductController::class, 'pro
 
 // --------------------------------------------- Quantity --------------------------------------------------------
 
-Route::resource('/quantity', QuantityController::class);
+    Route::resource('/quantity', QuantityController::class);
 
-Route::get('/quantity_json-data/', [QuantityController::class, 'quantityDataJson'])->name('quantityDataJson');
-Route::get('/quantity_json-data_search/{search}', [QuantityController::class, 'quantityDataJsonSearch'])->name('quantityDataJsonSearch');
+    Route::get('/quantity_json-data/', [QuantityController::class, 'quantityDataJson'])->name('quantityDataJson');
+    Route::get('/quantity_json-data_search/{search}', [QuantityController::class, 'quantityDataJsonSearch'])->name('quantityDataJsonSearch');
 
 
 // --------------------------------------------- Quantity --------------------------------------------------------
@@ -49,7 +53,20 @@ Route::get('/quantity_json-data_search/{search}', [QuantityController::class, 'q
 
 // --------------------------------------------- Admin Panel --------------------------------------------------------
 
-Route::get('admin-panel', [AdminPanelController::class, 'dashboard']);
+    Route::get('admin-panel', [AdminPanelController::class, 'dashboard'])->name('dashboard');
 
 // --------------------------------------------- Admin Panel --------------------------------------------------------
+
+// --------------------------------------------- Logout --------------------------------------------------------
+
+    Route::get('logout', function (){
+        \auth()->logout();
+        return redirect()->route('home');
+    })->name('log_out');
+
+// --------------------------------------------- Logout --------------------------------------------------------
+
+
+});
+
 
