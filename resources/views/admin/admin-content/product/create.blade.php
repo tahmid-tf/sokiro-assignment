@@ -55,9 +55,10 @@
                     formData.append('product_stock', this.product_stock);
 
                     axios.post('{{ route('product.store') }}', formData).then(el => {
-                        if (el.status == 201) {
+                        if (el.status == 200) {
                             alert("Product Added");
                         }
+
                     });
                 }
             }

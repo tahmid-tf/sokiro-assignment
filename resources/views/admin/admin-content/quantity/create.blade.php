@@ -52,7 +52,9 @@
                     formData.append('qty', this.qty);
 
                     axios.post('{{ route('quantity.store') }}', formData).then(el => {
-                        console.log(el.status);
+                        if (el.status == 200) {
+                            alert("Product Added");
+                        }
                     });
                 }
             }
