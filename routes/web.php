@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 
 // --------------------------------------------- Logout --------------------------------------------------------
 
-    Route::get('logout', function (){
+    Route::get('log_out', function (){
         \auth()->logout();
         return redirect()->route('home');
     })->name('log_out');
