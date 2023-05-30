@@ -9,7 +9,8 @@
 <hr>
 
 >Web routes can be found from routes->web.php <br>
->API routes can be found from routes->api.php 
+>API routes can be found from routes->api.php <br> 
+>The SQL is file is provided, it is named as "sokiro.sql"
 
 <hr>
 
@@ -41,3 +42,7 @@
 >Product data search frontend [ GIF Format ]
 
 <img src="public/images/sokiro_gif.gif" style="width: 100%">
+
+>Quantity data search frontend [ Image Format ]
+
+<img src="public/images/quantity.PNG" style="width: 100%">
